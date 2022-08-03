@@ -33,12 +33,13 @@ velojogador=3
 score=0
 max_score=0
 saved_max_sore=0
+score_last=0
 
 #Update posicao a cada loop
 def update_jogador(y_pos):
     global jump 
     global y_change
-    jump_height=9
+    jump_height=10
     gravidade= 0.4
     if jump:
         y_change= -jump_height
@@ -75,17 +76,17 @@ def caso_colisao(rect_list, j):
 #loop do jogo
 while rodando:
     timer.tick(fps)
-    tela.fill(azul)
+    tela.fill(background)
     tela.blit(jogador_img, (jogador_x, jogador_y))
     blocos= []
     texto_pontuacao= fonte_p.render("Score: "+  str(score), True, branco, background )
     tela.blit(texto_pontuacao,(300,20))
     texto_maxpontuacao= fonte_p.render("High Score: "+  str(max_score), True, branco, background )
     tela.blit(texto_maxpontuacao,(280,40))
+
     for i in range(len(plataformas)):
         bloco= pygame.draw.rect(tela, preto, plataformas[i], 0, 3)
         blocos.append(bloco)
-
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             rodando = False
@@ -96,6 +97,7 @@ while rodando:
                 jogador_x=170
                 jogador_y=400
                 background=azul
+                score_last=0
                 plataformas=[[175, 480, 70, 10], [85, 370, 70, 10], [265, 370, 70, 10],[175, 260, 70, 10], [85, 150, 70, 10], [265, 150, 70, 10], [175, 40, 70, 10]]
             if event.key == pygame.K_a:
                 x_change = -velojogador
@@ -131,6 +133,10 @@ while rodando:
         jogador_img = pygame.transform.flip(pygame.transform.scale(pygame.image.load("spritekkkk.png"), (90, 70)), 1, 0)
     if score>max_score:
         max_score=score
+    if score-score_last>15:
+        score_last= score
+        background=(random.randint(1, 255), random.randint(1, 255), random.randint(1, 255))
+
     pygame.display.flip()
 
 pygame.quit()
