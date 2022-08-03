@@ -83,6 +83,7 @@ while rodando:
     tela.blit(texto_pontuacao,(300,20))
     texto_maxpontuacao= fonte_p.render("High Score: "+  str(max_score), True, branco, background )
     tela.blit(texto_maxpontuacao,(280,40))
+
     for i in range(len(plataformas)):
         bloco= pygame.draw.rect(tela, preto, plataformas[i], 0, 3)
         blocos.append(bloco)
