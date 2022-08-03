@@ -28,7 +28,7 @@ while menu:
     tela.blit(bg, (0,0))
     mouse = pygame.mouse.get_pos()
 
-    if largura/6 <= mouse[0] <= largura/6-10 and altura/2 <= mouse[1] <= altura/2+40:
+    if largura/6 <= mouse[0] <= largura/6+130 and altura/2 <= mouse[1] <= altura/2+40:
         pygame.draw.rect(tela, cor_clara, (largura/6-10, altura/2, 140, 40))
     else:
         pygame.draw.rect(tela, cor_escura, (largura/6-10, altura/2, 140, 40))
