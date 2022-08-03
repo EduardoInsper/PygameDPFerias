@@ -1,4 +1,5 @@
 import pygame
+import random
 pygame.init()
 
 #constantes
@@ -40,6 +41,16 @@ def update_jogador(y_pos):
     return y_pos
 
 #Update plataformas
+def update_plataformas(minhalista, y_pos, change):
+    if y_pos<250 and change<0:
+        for i in range(len(minhalista)):
+            minhalista[i][1]-= change
+    else:
+        pass
+    for item in range(len(minhalista)):
+        if minhalista[item][1]>500:
+            minhalista[item]=[random.randint(0, 320), random.randint(-50, -10), 70, 10]
+    return minhalista
 
 
 #Caso haja colisão
@@ -76,11 +87,11 @@ while rodando:
             if event.key == pygame.K_d:
                 x_change = 0
 
-    jogador_y= update_jogador(jogador_y)
+    
     jump=caso_colisao(blocos, jump )
     jogador_x+= x_change
     jogador_y = update_jogador(jogador_y)
-    plataformas=update_plataformas()
-    pygame.display.flip(plataformas, jogador_y, y_change)
+    plataformas=update_plataformas(plataformas, jogador_y, y_change)
+    pygame.display.flip()
 
 pygame.quit()
