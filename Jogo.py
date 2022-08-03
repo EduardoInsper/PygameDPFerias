@@ -65,6 +65,16 @@ def update_player(y_pos):
         jump=False
     y_pos+= y_change
     y_change+= gravidade
+    
+#Caso haja colisão
+def caso_colisao(rect_list, j):
+    global player_x
+    global player_y
+    global y_change
+    for i in range(len(rect_list)):
+        if rect_list[i].colliderect([player_x, player_y + 60, 90, 10]) and jump==False and y_change>0:
+            j=True
+    return j
 
 #Loop principal
 running=True
