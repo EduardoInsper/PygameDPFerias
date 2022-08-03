@@ -8,11 +8,12 @@ altura = 500
 tela = pygame.display.set_mode((largura, altura))
 cor_clara = (170,170,170)
 cor_escura = (100,100,100)
+preto = (0,0,0)
 roxo = (100,0,100)
 fonte_p = pygame.font.Font('aladdin.ttf', 27)
 branco = (255,255,255)
 menu = True
-  
+
 while menu:
       
     for ev in pygame.event.get():
@@ -24,6 +25,7 @@ while menu:
             if largura/2 <= mouse[0] <= largura/2+140 and altura/2 <= mouse[1] <= altura/2+40:
                 menu = False
             if largura/6 <= mouse[0] <= largura/6+140 and altura/2 <= mouse[1] <= altura/2+40:
+                tela.fill(preto)
                 menu = False
     tela.blit(bg, (0,0))
     mouse = pygame.mouse.get_pos()
