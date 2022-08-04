@@ -3,7 +3,7 @@ import pygame
 import random
 pygame.init()
 
-#constantes
+#Constantes
 branco = (255, 255, 255)
 preto = (0, 0, 0)
 azul = (0, 0, 255)
@@ -14,6 +14,8 @@ fps = 60
 fonte_p = pygame.font.Font("freesansbold.ttf", 16)
 fonte_g = pygame.font.Font('aladdin.ttf', 32)
 timer = pygame.time.Clock()
+
+#Tela
 largura = 400
 altura = 500
 tela = pygame.display.set_mode((largura, altura))
@@ -73,24 +75,28 @@ def caso_colisao(rect_list, j):
             j=True
     return j
 
-#loop do jogo
+#loop do jogo(principal)
 while rodando:
     timer.tick(fps)
     tela.fill(background)
     tela.blit(jogador_img, (jogador_x, jogador_y))
     blocos= []
+    #Textos de pontuação
     texto_pontuacao= fonte_p.render("Score: "+  str(score), True, branco, background )
     tela.blit(texto_pontuacao,(300,20))
     texto_maxpontuacao= fonte_p.render("High Score: "+  str(max_score), True, branco, background )
     tela.blit(texto_maxpontuacao,(280,40))
-
+    #Criação de blocos
     for i in range(len(plataformas)):
         bloco= pygame.draw.rect(tela, preto, plataformas[i], 0, 3)
         blocos.append(bloco)
+    #Jogando o jogo
     for event in pygame.event.get():
+        #Caso o usuario saia
         if event.type == pygame.QUIT:
             rodando = False
         if event.type == pygame.KEYDOWN:
+            #Para reiniciar, clicando em space
             if event.key==pygame.K_SPACE and game_over:
                 game_over=False
                 score=0
@@ -99,6 +105,7 @@ while rodando:
                 background=azul
                 score_last=0
                 plataformas=[[175, 480, 70, 10], [85, 370, 70, 10], [265, 370, 70, 10],[175, 260, 70, 10], [85, 150, 70, 10], [265, 150, 70, 10], [175, 40, 70, 10]]
+            #Funcionamento do jogo
             if event.key == pygame.K_a:
                 x_change = -velojogador
             if event.key == pygame.K_d:
@@ -109,8 +116,9 @@ while rodando:
             if event.key == pygame.K_d:
                 x_change = 0
 
-    
+    #Verificar colisão
     jump=caso_colisao(blocos, jump )
+    #Update
     jogador_x+= x_change
 
     if jogador_y < 440:
@@ -126,13 +134,15 @@ while rodando:
         jogador_x= -20
     elif jogador_x>330:
         jogador_x=330
-    
+    # Espelha personagem de acordo com sentido do movimento
     if x_change >0:
         jogador_img = pygame.transform.scale(pygame.image.load("spritekkkk.png"), (90, 70))
     elif x_change<0:
         jogador_img = pygame.transform.flip(pygame.transform.scale(pygame.image.load("spritekkkk.png"), (90, 70)), 1, 0)
+    #Contabiliza high score
     if score>max_score:
         max_score=score
+    #Muda fundo de 15 em 15 blocos
     if score-score_last>15:
         score_last= score
         background=(random.randint(1, 255), random.randint(1, 255), random.randint(1, 255))
