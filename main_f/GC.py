@@ -37,6 +37,10 @@ max_score=0
 saved_max_sore=0
 score_last=0
 
+#Musica
+musica_de_fundo= pygame.mixer.music.load("musica_de_fundo.mp3")
+pygame.mixer.music.play(-1)
+
 #Update posicao a cada loop
 def update_jogador(y_pos):
     global jump 
