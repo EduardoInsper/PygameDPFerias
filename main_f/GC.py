@@ -1,6 +1,8 @@
 from string import whitespace
 import pygame
 import random
+
+from telas import menu_tela
 pygame.init()
 
 #Constantes
@@ -11,8 +13,9 @@ cinza = (100, 100, 100)
 background= azul
 jogador_img = pygame.transform.scale(pygame.image.load("spritekkkk.png"), (90, 70))
 fps = 60
-fonte_p = pygame.font.Font("freesansbold.ttf", 16)
-fonte_g = pygame.font.Font('aladdin.ttf', 32)
+fonte_p = pygame.font.Font("aladdin.ttf", 25)
+fonte_pontos = pygame.font.Font("freesansbold.ttf", 16)
+fonte_g = pygame.font.Font('aladdin.ttf', 40)
 timer = pygame.time.Clock()
 
 #Tela
@@ -20,7 +23,7 @@ largura = 400
 altura = 500
 tela = pygame.display.set_mode((largura, altura))
 pygame.display.set_caption("Aladdin")
-rodando = True
+rodando = False
 
 #variaveis
 jogador_x = 170
@@ -80,15 +83,27 @@ def caso_colisao(rect_list, j):
     return j
 
 #loop do jogo(principal)
+while rodando == False:
+    for event in pygame.event.get():
+        if event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_SPACE:
+                rodando = True
+        if event.type == pygame.QUIT or event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE:
+            pygame.quit()
+        tela.blit(fonte_p.render('Para começar/recomeçar aperte espaço' , True , branco) , (largura/12,altura/6))
+        tela.blit(fonte_p.render('Ande com as teclas"A" e "D"' , True , branco) , (largura/7,altura/2))
+        tela.blit(fonte_p.render('Para sair aperte ESC' , True , branco) , (largura/4.5,altura/1.5))
+        
+        pygame.display.update()
 while rodando:
     timer.tick(fps)
     tela.fill(background)
     tela.blit(jogador_img, (jogador_x, jogador_y))
     blocos= []
     #Textos de pontuação
-    texto_pontuacao= fonte_p.render("Score: "+  str(score), True, branco, background )
+    texto_pontuacao= fonte_pontos.render("Score: "+  str(score), True, branco, background )
     tela.blit(texto_pontuacao,(300,20))
-    texto_maxpontuacao= fonte_p.render("High Score: "+  str(max_score), True, branco, background )
+    texto_maxpontuacao= fonte_pontos.render("High Score: "+  str(max_score), True, branco, background )
     tela.blit(texto_maxpontuacao,(280,40))
     #Criação de blocos
     for i in range(len(plataformas)):
