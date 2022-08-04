@@ -43,9 +43,6 @@ max_score=0
 saved_max_sore=0
 score_last=0
 
-#Musica
-musica_de_fundo= pygame.mixer.music.load("musica_de_fundo.mp3")
-pygame.mixer.music.play(-1)
 
 #Update posicao a cada loop
 def update_jogador(y_pos):
@@ -86,7 +83,10 @@ def caso_colisao(rect_list, j):
     return j
 
 #loop do jogo(principal)
+menu_tela()
 while rodando == False:
+    pygame.mixer.music.load("MusicaJogo.mp3")
+    pygame.mixer.music.play(-1)
     for event in pygame.event.get():
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_SPACE:

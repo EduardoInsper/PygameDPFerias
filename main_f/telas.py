@@ -12,13 +12,14 @@ fonte_p = pygame.font.Font('aladdin.ttf', 27)
 fonte_g = pygame.font.Font('aladdin.ttf', 60)
 branco = (255,255,255)
 def menu_tela():
+    pygame.mixer.music.load("MenuMusic.mp3")
+    pygame.mixer.music.play(-1)
     menu = True
     while menu:
-        
         for ev in pygame.event.get():
             
             if ev.type == pygame.QUIT:
-                menu = False
+                pygame.quit()
                 
             if ev.type == pygame.MOUSEBUTTONDOWN:
                 if largura/2 <= mouse[0] <= largura/2+140 and altura/2 <= mouse[1] <= altura/2+40:
@@ -49,4 +50,3 @@ def menu_tela():
         tela.blit(fonte_g.render('Aladdin' , True , branco) , (largura/4,altura/6))
         
         pygame.display.update()
-menu_tela()
