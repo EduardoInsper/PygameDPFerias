@@ -81,7 +81,7 @@ def caso_colisao(rect_list, j):
     global jogador_y
     global y_change
     for i in range(len(rect_list)):
-        if rect_list[i].colliderect([jogador_x-2, jogador_y + 40, 90, 5]) and jump==False and y_change>0:
+        if rect_list[i].colliderect([jogador_x-2, jogador_y + 40, 40, 15]) and jump==False and y_change>0:
             j=True
     return j
 
