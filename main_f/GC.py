@@ -11,7 +11,6 @@ preto = (0, 0, 0)
 azul = (0, 0, 255)
 cinza = (100, 100, 100)
 background= azul
-#jogador_img = pygame.transform.scale(pygame.image.load("spritekkkk.png"), (90, 70))
 jogador_idle = pygame.image.load("alladin_jogador/sprite_alladinF00.png")
 tapete = pygame.image.load("tapete/sprite_tapete0.png")
 fps = 60
